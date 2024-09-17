@@ -1,0 +1,11 @@
+# Elisp
+*.elc
+
+# packages
+/elpa/
+/.cask/
+
+# recovery and backup directories
+/auto-save-list/
+/.backups/
+/.auto-saves/
