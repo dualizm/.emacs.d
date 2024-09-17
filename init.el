@@ -59,7 +59,7 @@
 (init-pkg 'paredit
 	  (add-to-list 'auto-mode-alist '("\\.lisp\\'" . paredit-mode)))
 
-(load-theme 'modus-vivendi t)
+(load-theme 'modus-operandi t)
 
 
 (custom-set-variables
