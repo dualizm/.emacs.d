@@ -24,13 +24,19 @@
   (setq auto-save-file-name-transforms
 	`((".*" ,saves t))))
 
+;;; set keybinds
+(global-set-key (kbd "C-c r s") 'replace-string)
+(global-set-key (kbd "C-c r r") 'replace-regexp)
+
+(global-set-key (kbd "C-c c") 'comment-or-uncomment-region)
+
 (package-initialize)
 (require 'package)
 (setf package-archives
-	     '(("melpa-stable" . "https://stable.melpa.org/packages/")
-	       ("melpa" . "https://melpa.org/packages/")
-               ("elpa" . "https://elpa.gnu.org/packages/")
-               ("nongnu" . "https://elpa.nongnu.org/nongnu/")))
+      '(("melpa-stable" . "https://stable.melpa.org/packages/")
+	("melpa" . "https://melpa.org/packages/")
+        ("elpa" . "https://elpa.gnu.org/packages/")
+        ("nongnu" . "https://elpa.nongnu.org/nongnu/")))
 
 (defmacro init-pkg (pkg &rest after-install)
   `(unless (package-installed-p ,pkg)
@@ -57,7 +63,8 @@
 (setq inferior-lisp-program "sbcl")
 (init-pkg 'slime)
 (init-pkg 'paredit
-	  (add-to-list 'auto-mode-alist '("\\.lisp\\'" . paredit-mode)))
+	  (add-hook 'lisp-mode-hook 'paredit-mode)
+	  (add-hook 'emacs-lisp-mode-hook 'paredit-mode))
 
 (load-theme 'modus-operandi t)
 
