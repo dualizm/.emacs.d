@@ -27,7 +27,6 @@
 ;;; set keybinds
 (global-set-key (kbd "C-c r s") 'replace-string)
 (global-set-key (kbd "C-c r r") 'replace-regexp)
-
 (global-set-key (kbd "C-c c") 'comment-or-uncomment-region)
 
 (package-initialize)
@@ -65,14 +64,16 @@
 
 ;;; lisp
 (lpkg 'janet-mode)
-
 (lpkg 'geiser-guile)
 
 (setq inferior-lisp-program "sbcl")
 (lpkg 'slime)
+
 (lpkg 'paredit
-  (add-hook 'lisp-mode-hook 'paredit-mode)
-  (add-hook 'emacs-lisp-mode-hook 'paredit-mode))
+  (dolist (hook '(lisp-mode-hook
+		  emacs-lisp-mode-hook
+		  janet-mode-hook))
+    (add-hook hook 'paredit-mode)))
 
 (load-theme 'modus-operandi t)
 
