@@ -29,6 +29,7 @@
 (global-set-key (kbd "C-c r r") 'replace-regexp)
 (global-set-key (kbd "C-c c") 'comment-or-uncomment-region)
 
+;;; packages
 (package-initialize)
 (require 'package)
 (setf package-archives
@@ -64,7 +65,7 @@
 
 ;;; lisp
 (lpkg 'janet-mode)
-(lpkg 'geiser-guile)
+(lpkg 'geiser-chez)
 
 (setq inferior-lisp-program "sbcl")
 (lpkg 'slime)
@@ -72,6 +73,7 @@
 (lpkg 'paredit
   (dolist (hook '(lisp-mode-hook
 		  emacs-lisp-mode-hook
+		  scheme-mode-hook
 		  janet-mode-hook))
     (add-hook hook 'paredit-mode)))
 
@@ -85,7 +87,7 @@
  ;; If there is more than one, they won't work right.
  '(codeium/metadata/api_key "1907907b-9175-464b-8d9c-5311517e7f95")
  '(package-selected-packages
-   '(janet-mode geiser-guile projectile codeium paredit slime avy vertico magit company)))
+   '(geiser-chez janet-mode geiser-guile projectile codeium paredit slime avy vertico magit company)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
