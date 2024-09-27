@@ -55,6 +55,8 @@
 
 (lpkg 'magit)
 
+(lpkg 'eglot)
+
 (lpkg 'vertico
   (vertico-mode))
 
@@ -65,10 +67,9 @@
 
 ;;; lisp
 (lpkg 'janet-mode)
-(lpkg 'geiser-chez)
 
 (setq inferior-lisp-program "sbcl")
-(lpkg 'slime)
+(lpkg 'sly)
 
 (lpkg 'paredit
   (dolist (hook '(lisp-mode-hook
@@ -79,18 +80,3 @@
 
 (load-theme 'modus-operandi t)
 
-
-(custom-set-variables
- ;; custom-set-variables was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(codeium/metadata/api_key "1907907b-9175-464b-8d9c-5311517e7f95")
- '(package-selected-packages
-   '(geiser-chez janet-mode geiser-guile projectile codeium paredit slime avy vertico magit company)))
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- )
