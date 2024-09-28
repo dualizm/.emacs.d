@@ -1,82 +1,91 @@
-;;;;;;;;;;;;;;;;;;;;
-;; dualizm config ;;
-;;;;;;;;;;;;;;;;;;;;
+;;; dualizm config
 
-;;; warnings
-(defvar warning-minimum-level :emergency)
-(setf visible-bell 1)
-
-;;; set font
-(let ((font "-JB-JetBrains Mono-normal-normal-normal-*-19-*-*-*-m-0-iso10646-1"))
-  (when (find-font (font-spec :name font))
-    (set-face-attribute 'default nil :font font :height 120)))
-
-;;; save directories
-(let* ((default-directory "~/.emacs.d/")
-       (backups (concat default-directory ".backups"))
-       (saves (concat default-directory ".auto-saves")))
-  (unless (file-directory-p backups)
-    (make-directory backups))
-  (unless (file-directory-p saves)
-    (make-directory saves))
-  (setq backup-directory-alist
-	`((".*" . ,backups)))
-  (setq auto-save-file-name-transforms
-	`((".*" ,saves t))))
-
-;;; set keybinds
-(global-set-key (kbd "C-c r s") 'replace-string)
-(global-set-key (kbd "C-c r r") 'replace-regexp)
-(global-set-key (kbd "C-c c") 'comment-or-uncomment-region)
-
-;;; packages
-(package-initialize)
+;;; Packages
 (require 'package)
 (setf package-archives
       '(("melpa-stable" . "https://stable.melpa.org/packages/")
 	("melpa" . "https://melpa.org/packages/")
-        ("elpa" . "https://elpa.gnu.org/packages/")
-        ("nongnu" . "https://elpa.nongnu.org/nongnu/")))
+        ("elpa" . "https://elpa.gnu.org/packages/")))
 
-(defmacro lpkg (pkg &rest after-install)
-  (declare (indent 1))
-  `(cond
-    ((package-installed-p ,pkg) ,@after-install)
-    (t (package-refresh-contents)
-       (package-install ,pkg))))
+(add-to-list 'package-pinned-packages '(cider . "melpa-stable") t)
+(add-to-list 'package-pinned-packages '(magit . "melpa-stable") t)
 
-(lpkg 'company
-  (global-company-mode t)
-  (setq company-idle-delay 0))
+(package-initialize)
 
-(lpkg 'projectile
-  (projectile-mode 1)
-  (define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map))
+(when (not package-archive-contents)
+  (package-refresh-contents))
 
-(lpkg 'magit)
+(defvar packages
+  '(
+    ;; modular and extensible text completion framework for Emacs
+    company
 
-(lpkg 'eglot)
+    ;; project navigation
+    projectile
 
-(lpkg 'vertico
-  (vertico-mode))
+    ;; git integration
+    magit
 
-(lpkg 'avy
-  (global-set-key (kbd "M-g c") 'avy-goto-char)
-  (global-set-key (kbd "M-g l") 'avy-goto-line)
-  (global-set-key (kbd "M-g f") 'avy-goto-word-1))
+    ;; A client for Language Server Protocol servers 
+    eglot
 
-;;; lisp
-(lpkg 'janet-mode)
+    ;; easier execution of commands
+    smex
 
-(setq inferior-lisp-program "sbcl")
-(lpkg 'sly)
+    ;; colorful paranthesis matching
+    rainbow-delimiters
+    
+    ;; vertical completion UI based on the default completion system
+    vertico
 
-(lpkg 'paredit
-  (dolist (hook '(lisp-mode-hook
-		  emacs-lisp-mode-hook
-		  scheme-mode-hook
-		  janet-mode-hook))
-    (add-hook hook 'paredit-mode)))
+    ;; Jump to things in Emacs tree-style
+    avy
+    
+    ;; easier edit lisp
+    paredit
 
-(load-theme 'modus-operandi t)
+    ;; key bindings and code colorization for Clojure
+    clojure-mode
 
+    ;; extra syntax hilighting for Clojure
+    clojure-mode-extra-font-locking
+
+    ;; Integration with a Clojure REPL
+    cider
+    
+    ;; edit html tags like sexps
+    tagedit))
+
+(if (eq system-type 'darwin)
+    (add-to-list 'packages 'exec-path-from-shell))
+
+(dolist (p packages)
+  (when (not (package-installed-p p))
+    (package-install p)))
+
+(add-to-list 'load-path "~/.emacs.d/conf")
+
+(dolist (path '("ui.el"
+                "shell.el"
+                "nav.el"
+                "misc.el"
+                "edit.el"
+                "elisp-edit.el"
+                "clojure.el"
+                "js.el"))
+  (load path))
+
+
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(package-selected-packages
+   '(tagedit cider clojure-mode-extra-font-locking clojure-mode smex vertico sly rainbow-delimiters projectile paredit magit janet-mode eglot company avy)))
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ )
