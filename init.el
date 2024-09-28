@@ -44,14 +44,8 @@
     ;; easier edit lisp
     paredit
 
-    ;; key bindings and code colorization for Clojure
-    clojure-mode
-
-    ;; extra syntax hilighting for Clojure
-    clojure-mode-extra-font-locking
-
-    ;; Integration with a Clojure REPL
-    cider
+    ;; Common lisp IDE
+    sly
     
     ;; edit html tags like sexps
     tagedit))
@@ -66,12 +60,11 @@
 (add-to-list 'load-path "~/.emacs.d/conf")
 
 (dolist (path '("ui.el"
-                "shell.el"
                 "nav.el"
                 "misc.el"
                 "edit.el"
                 "elisp-edit.el"
-                "clojure.el"
+                "cl.el"
                 "js.el"))
   (load path))
 
