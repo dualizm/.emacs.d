@@ -55,10 +55,21 @@
 
 (add-to-list 'load-path "~/.emacs.d/conf")
 
-(dolist (path '("ui.el"
-                "nav.el"
-                "misc.el"
-                "edit.el"
-                "elisp-edit.el"
-                "js.el"))
-  (load path))
+(defvar configs 
+  '(
+    "ui.el"
+
+    "nav.el"
+
+    "misc.el"
+
+    "edit.el"
+
+    "elisp-edit.el"
+
+    "js.el"
+    ))
+
+(dolist (config configs)
+  (load config))
+

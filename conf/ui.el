@@ -3,6 +3,7 @@
 
 ;; Show line numbers
 (global-linum-mode)
+(add-hook 'shell-mode-hook (lambda () (linum-mode 0)))
 
 ;; Turn off tool bar
 (when (fboundp 'tool-bar-mode)
@@ -35,7 +36,7 @@
 (setq-default frame-title-format "%b (%f)")
 
 ;; Don't pop up font menu
-(global-set-key (kbd "s-t") '(lambda () (interactive)))
+(global-set-key (kbd "s-t") (lambda () (interactive)))
 
 ;; No bell
 (setq ring-bell-function 'ignore)
