@@ -25,11 +25,11 @@
 (global-set-key (kbd "C-c r s") 'replace-string)
 (global-set-key (kbd "C-c r r") 'replace-regexp)
 
-;; Copy
-(defun copy-line ()
+;; Kill-save-line
+(defun kill-line-save ()
   (interactive)
   (kill-ring-save (line-beginning-position) (line-end-position)))
-(global-set-key (kbd "C-c l c") 'copy-line)
+(global-set-key (kbd "C-x c l") 'kill-line-save)
 
 ;; Comments key binding
 (defun toggle-comment-on-line ()

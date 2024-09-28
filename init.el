@@ -7,7 +7,6 @@
 	("melpa" . "https://melpa.org/packages/")
         ("elpa" . "https://elpa.gnu.org/packages/")))
 
-(add-to-list 'package-pinned-packages '(cider . "melpa-stable") t)
 (add-to-list 'package-pinned-packages '(magit . "melpa-stable") t)
 
 (package-initialize)
@@ -43,9 +42,6 @@
     
     ;; easier edit lisp
     paredit
-
-    ;; Common lisp IDE
-    sly
     
     ;; edit html tags like sexps
     tagedit))
@@ -64,21 +60,5 @@
                 "misc.el"
                 "edit.el"
                 "elisp-edit.el"
-                "cl.el"
                 "js.el"))
   (load path))
-
-
-(custom-set-variables
- ;; custom-set-variables was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(package-selected-packages
-   '(tagedit cider clojure-mode-extra-font-locking clojure-mode smex vertico sly rainbow-delimiters projectile paredit magit janet-mode eglot company avy)))
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- )
