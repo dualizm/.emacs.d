@@ -15,3 +15,5 @@
 projectile-bookmarks.eld
 .recentf
 .smex-items
+.cache/
+.lsp-session-v1

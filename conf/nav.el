@@ -19,12 +19,7 @@
 (smex-initialize)
 (global-set-key (kbd "M-x") 'smex)
 
-(vertico-mode)
-
 ;; Avy key bindings
 (global-set-key (kbd "M-g c") 'avy-goto-char)
 (global-set-key (kbd "M-g l") 'avy-goto-line)
 (global-set-key (kbd "M-g f") 'avy-goto-word-1)
-
-(projectile-global-mode)
-

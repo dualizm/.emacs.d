@@ -23,10 +23,9 @@
 
 ;; Emacs interacts
 (setq
- x-select-enable-clipboard t
- x-select-enable-primary t
+ select-enable-clipboard t
+ select-enable-primary t
  save-interprogram-paste-before-kill t
- apropos-do-all t
  mouse-yank-at-point t)
 
 ;; No cursor blinking

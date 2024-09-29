@@ -27,13 +27,14 @@
 
 ;; Kill-save-line
 (defun kill-line-save ()
+  "Copy line of text."
   (interactive)
   (kill-ring-save (line-beginning-position) (line-end-position)))
 (global-set-key (kbd "C-x c l") 'kill-line-save)
 
 ;; Comments key binding
 (defun toggle-comment-on-line ()
-  "comment or uncomment current line"
+  "Comment or uncomment current line."
   (interactive)
   (comment-or-uncomment-region (line-beginning-position) (line-end-position)))
 (global-set-key (kbd "C-;") 'toggle-comment-on-line)
@@ -64,8 +65,8 @@
   (setq auto-save-file-name-transforms
 	`((".*" ,saves t))))
 
-;; Use 2 spaces for tabs
 (defun die-tabs ()
+  "Remove spaces in file and place tabs."
   (interactive)
   (set-variable 'tab-width 2)
   (mark-whole-buffer)
@@ -73,3 +74,10 @@
   (keyboard-quit))
 
 (setq electric-indent-mode nil)
+
+;; On mods after init
+(dolist (mode '(global-flycheck-mode
+                vertico-mode
+                global-company-mode
+                projectile-global-mode))
+  (add-hook 'after-init-hook mode))

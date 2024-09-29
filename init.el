@@ -2,6 +2,7 @@
 
 ;;; Packages
 (require 'package)
+;;; Code:
 (setf package-archives
       '(("melpa-stable" . "https://stable.melpa.org/packages/")
 	("melpa" . "https://melpa.org/packages/")
@@ -14,62 +15,68 @@
 (when (not package-archive-contents)
   (package-refresh-contents))
 
-(defvar packages
-  '(
-    ;; modular and extensible text completion framework for Emacs
-    company
+(let ((packages
+       '(
+         ;; modular and extensible text completion framework for Emacs
+         company
 
-    ;; project navigation
-    projectile
+         ;; project navigation
+         projectile
 
-    ;; git integration
-    magit
+         ;; git integration
+         magit
 
-    ;; A client for Language Server Protocol servers 
-    eglot
+         ;; On the fly syntax checking for GNU Emacs
+         flycheck
 
-    ;; easier execution of commands
-    smex
+         ;; A client for Language Server Protocol servers
+         lsp-mode
 
-    ;; colorful paranthesis matching
-    rainbow-delimiters
-    
-    ;; vertical completion UI based on the default completion system
-    vertico
+         ;; UI modules for lsp-mode
+         lsp-ui
 
-    ;; Jump to things in Emacs tree-style
-    avy
-    
-    ;; easier edit lisp
-    paredit
-    
-    ;; edit html tags like sexps
-    tagedit))
+         ;; easier execution of commands
+         smex
 
-(if (eq system-type 'darwin)
-    (add-to-list 'packages 'exec-path-from-shell))
+         ;; colorful paranthesis matching
+         rainbow-delimiters
+         
+         ;; vertical completion UI based on the default completion system
+         vertico
 
-(dolist (p packages)
-  (when (not (package-installed-p p))
-    (package-install p)))
+         ;; Jump to things in Emacs tree-style
+         avy
+         
+         ;; easier edit lisp
+         paredit
+         
+         ;; edit html tags like sexps
+         tagedit)))
+  (if (eq system-type 'darwin)
+      (add-to-list 'packages 'exec-path-from-shell))
+  
+  (dolist (p packages)
+    (when (not (package-installed-p p))
+      (package-install p))))
 
 (add-to-list 'load-path "~/.emacs.d/conf")
+(let ((configs
+       '(
+         "ui.el"
 
-(defvar configs 
-  '(
-    "ui.el"
+         "nav.el"
 
-    "nav.el"
+         "misc.el"
 
-    "misc.el"
+         "edit.el"
 
-    "edit.el"
+         "elisp-edit.el"
 
-    "elisp-edit.el"
+         "js.el"
 
-    "js.el"
-    ))
+         "lsp.el"
+         )))
+  (dolist (config configs)
+    (load config)))
 
-(dolist (config configs)
-  (load config))
-
+;;; init.el ends here.
