@@ -19,6 +19,12 @@
 (smex-initialize)
 (global-set-key (kbd "M-x") 'smex)
 
+;; Magit key bindings
+(global-set-key (kbd "<f5>")
+                (lambda () 
+                  (interactive)
+                  (magit)))
+
 ;; Avy key bindings
 (global-set-key (kbd "M-g c") 'avy-goto-char)
 (global-set-key (kbd "M-g l") 'avy-goto-line)

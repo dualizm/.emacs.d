@@ -2,6 +2,7 @@
 (dolist (hook '(c-mode-hook
                 js-mode-hook
                 js-jsx-mode-hook
+                java-mode-hook
                 typescript-mode-hook
                 web-mode-hook))
   (add-hook hook #'lsp-deferred))

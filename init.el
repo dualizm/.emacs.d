@@ -1,15 +1,16 @@
-;;; dualizm config
+;;; init.el --- dualizm config
+;;; Author: Dualizm
+;;; Commentary:
+;;; This is my personal Emacs configuration.
+;;; Code:
 
 ;;; Packages
 (require 'package)
-;;; Code:
-(setf package-archives
-      '(("melpa-stable" . "https://stable.melpa.org/packages/")
-	("melpa" . "https://melpa.org/packages/")
-        ("elpa" . "https://elpa.gnu.org/packages/")))
-
+(dolist (archive '(("melpa-stable" . "https://stable.melpa.org/packages/")
+                   ("melpa" . "https://melpa.org/packages/")
+                   ("elpa" . "https://elpa.gnu.org/packages/")))
+  (add-to-list 'package-archives archive))
 (add-to-list 'package-pinned-packages '(magit . "melpa-stable") t)
-
 (package-initialize)
 
 (when (not package-archive-contents)
@@ -72,7 +73,7 @@
 
          "elisp-edit.el"
 
-         "js.el"
+         "web.el"
 
          "lsp.el"
          )))

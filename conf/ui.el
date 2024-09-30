@@ -2,8 +2,7 @@
 (menu-bar-mode -1)
 
 ;; Show line numbers
-(global-linum-mode)
-(add-hook 'shell-mode-hook (lambda () (linum-mode 0)))
+(add-hook 'prog-mode-hook 'display-line-numbers-mode)
 
 ;; Turn off tool bar
 (when (fboundp 'tool-bar-mode)
