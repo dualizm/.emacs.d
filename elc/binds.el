@@ -23,7 +23,7 @@
   "Comment or uncomment current line."
   (interactive)
   (comment-or-uncomment-region (line-beginning-position) (line-end-position)))
-(global-set-key (kbd "C-;") 'toggle-comment-on-line)
+(global-set-key (kbd "C-c c") 'toggle-comment-on-line)
 
 ; (setq smex-save-file (concat user-emacs-directory ".smex-items"))
 ; (smex-initialize)
